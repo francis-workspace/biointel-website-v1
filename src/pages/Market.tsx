@@ -12,16 +12,16 @@ const Market = () => {
           <div className="container-main">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Market
+                Markets
               </h1>
               <p className="mt-4 text-base lg:text-lg text-muted-foreground">
-                Tracking the signals behind biotech pricing deal flow, capital formation, and the market narratives moving stocks.
+                Pricing signals, capital formation, and market structure—what moves biotech stocks and why.
               </p>
             </div>
           </div>
         </section>
-        <HeroSection category="Market" />
-        <FeaturedContentSection category="Market" />
+        <HeroSection category="Markets" />
+        <FeaturedContentSection category="Markets" />
       </main>
       <Footer />
     </div>

@@ -12,16 +12,16 @@ const News = () => {
           <div className="container-main">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Industry News
+                Industry
               </h1>
               <p className="mt-4 text-base lg:text-lg text-muted-foreground">
-                The latest business news and updates related to big tech and tech startups, including industry trends, events, new hires, and layoffs. We get the scoops.
+                Deal flow, company moves, trial design, and the industry dynamics that shape biotech outcomes.
               </p>
             </div>
           </div>
         </section>
-        <HeroSection category="News" />
-        <FeaturedContentSection category="News" />
+        <HeroSection category="Industry" />
+        <FeaturedContentSection category="Industry" />
       </main>
       <Footer />
     </div>

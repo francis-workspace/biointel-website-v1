@@ -7,8 +7,8 @@ const intelligenceCards = [
     dataPoint: '↑ 34%',
     headline: 'Q4 Funding Trends',
     description: 'Institutional capital shifts toward AI-enabled platforms',
-    link: '/analysis/q4-funding',
-    linkText: 'READ ANALYSIS',
+    link: '/markets',
+    linkText: 'VIEW MARKETS',
     accentColor: 'text-category-market',
   },
   {
@@ -17,8 +17,8 @@ const intelligenceCards = [
     dataPoint: '67%',
     headline: 'Phase II Failure Rate',
     description: 'Concentrated in three predictable categories',
-    link: '/analysis/phase-ii-failure',
-    linkText: 'SEE BREAKDOWN',
+    link: '/industry',
+    linkText: 'VIEW INDUSTRY',
     accentColor: 'text-category-risk',
   },
   {
@@ -27,8 +27,8 @@ const intelligenceCards = [
     dataPoint: '$2.3B',
     headline: 'New Deal Volume',
     description: 'Where investors are placing bets this quarter',
-    link: '/market/capital-flows',
-    linkText: 'VIEW DATA',
+    link: '/markets',
+    linkText: 'VIEW MARKETS',
     accentColor: 'text-category-capital',
   },
   {

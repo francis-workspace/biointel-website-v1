@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { Youtube, Linkedin, Twitter } from 'lucide-react';
 
 const contentLinks = [
-  { label: 'News', href: '/news' },
-  { label: 'Analysis', href: '/analysis' },
-  { label: 'Market', href: '/market' },
+  { label: 'Industry', href: '/industry' },
+  { label: 'Markets', href: '/markets' },
+  { label: 'Regulation', href: '/regulation' },
   { label: 'AI & Science', href: '/ai-science' },
 ];
 

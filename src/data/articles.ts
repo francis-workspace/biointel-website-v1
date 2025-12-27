@@ -1,4 +1,4 @@
-export type PillarCategory = 'News' | 'Analysis' | 'Market' | 'AI & Science';
+export type PillarCategory = 'Industry' | 'Markets' | 'Regulation' | 'AI & Science';
 
 export type ArticleContentBlock =
   | {
@@ -15,7 +15,7 @@ export type ArticleContentBlock =
 export type Article = {
   slug: string;
   category: PillarCategory;
-  categoryClass: 'category-news' | 'category-analysis' | 'category-market' | 'category-ai';
+  categoryClass: 'category-industry' | 'category-markets' | 'category-regulation' | 'category-ai';
   title: string;
   excerpt: string;
   author: string;
@@ -30,13 +30,13 @@ export type Article = {
 
 export const featuredArticle: Article = {
   slug: 'decoding-risk-asymmetric-catalysts',
-  category: 'Analysis',
-  categoryClass: 'category-analysis',
+  category: 'Industry',
+  categoryClass: 'category-industry',
   title: 'Decoding Risk Across the Most Asymmetric Biotech Catalysts',
   excerpt:
     'A compact framework for evaluating signal vs noise across trial design, endpoints, financing terms, and competitive landscapes—so you can separate momentum from durable signal.',
   author: 'BioIntel Research',
-  date: 'Dec 15, 2024',
+  date: 'Dec 15, 2025',
   readTime: '8 min read',
   deck:
     'A signal-first checklist for sizing asymmetric biotech setups—what to measure, what to ignore, and how to avoid getting trapped by narrative.',
@@ -83,12 +83,12 @@ export const featuredArticle: Article = {
 export const recentArticles: Article[] = [
   {
     slug: 'fda-week-clinical-holds-fast-tracks-label-updates',
-    category: 'News',
-    categoryClass: 'category-news',
+    category: 'Regulation',
+    categoryClass: 'category-regulation',
     title: 'FDA Week: Signals From Clinical Holds, Fast Tracks, and Label Updates',
     excerpt: 'A quick readout of regulatory moves that matter for near-term catalysts and sentiment.',
     author: 'BioIntel Research',
-    date: 'Dec 14, 2024',
+    date: 'Dec 14, 2025',
     readTime: '6 min read',
     deck:
       'A practical scan of what changed at the FDA this week—and how to think about second-order implications for timelines and probability-weighted value.',
@@ -134,12 +134,12 @@ export const recentArticles: Article[] = [
   },
   {
     slug: 'deal-watch-partnership-structures-back-2024',
-    category: 'News',
-    categoryClass: 'category-news',
+    category: 'Industry',
+    categoryClass: 'category-industry',
     title: 'Deal Watch: Partnership Structures That Are Back in 2024',
     excerpt: 'How milestone ladders and regional rights are being priced as risk appetite returns.',
     author: 'BioIntel Research',
-    date: 'Dec 13, 2024',
+    date: 'Dec 13, 2025',
     readTime: '10 min read',
     content: [],
     popularity: 91,
@@ -148,12 +148,12 @@ export const recentArticles: Article[] = [
   },
   {
     slug: 'hiring-layoffs-operator-moves-signal-q1',
-    category: 'News',
-    categoryClass: 'category-news',
+    category: 'Industry',
+    categoryClass: 'category-industry',
     title: 'Hiring & Layoffs: What Operator Moves Signal Into Q1',
     excerpt: 'A signal-first view of leadership changes and what they tend to precede.',
     author: 'BioIntel Research',
-    date: 'Dec 12, 2024',
+    date: 'Dec 12, 2025',
     readTime: '7 min read',
     content: [],
     popularity: 64,
@@ -161,12 +161,12 @@ export const recentArticles: Article[] = [
   },
   {
     slug: 'trial-design-pitfalls-false-confidence',
-    category: 'Analysis',
-    categoryClass: 'category-analysis',
+    category: 'Industry',
+    categoryClass: 'category-industry',
     title: 'Trial Design Pitfalls That Inflate False Confidence',
     excerpt: 'Where endpoint choices, powering assumptions, and comparator selection quietly distort the signal.',
     author: 'BioIntel Research',
-    date: 'Dec 11, 2024',
+    date: 'Dec 11, 2025',
     readTime: '9 min read',
     content: [],
     popularity: 88,
@@ -174,12 +174,12 @@ export const recentArticles: Article[] = [
   },
   {
     slug: 'competitive-landscapes-best-in-class-not-investable',
-    category: 'Analysis',
-    categoryClass: 'category-analysis',
+    category: 'Industry',
+    categoryClass: 'category-industry',
     title: 'Competitive Landscapes: When “Best-in-Class” Isn’t Investable',
     excerpt: 'A checklist to map differentiation, switching costs, and realistic share capture.',
     author: 'BioIntel Research',
-    date: 'Dec 10, 2024',
+    date: 'Dec 10, 2025',
     readTime: '8 min read',
     content: [],
     popularity: 61,
@@ -187,12 +187,12 @@ export const recentArticles: Article[] = [
   },
   {
     slug: 'read-early-biomarker-data-without-overfitting',
-    category: 'Analysis',
-    categoryClass: 'category-analysis',
+    category: 'Industry',
+    categoryClass: 'category-industry',
     title: 'How to Read Early Biomarker Data Without Overfitting',
     excerpt: 'Patterns that tend to break at Phase II/III—and how to stress test the narrative.',
     author: 'BioIntel Research',
-    date: 'Dec 09, 2024',
+    date: 'Dec 09, 2025',
     readTime: '7 min read',
     content: [],
     popularity: 57,
@@ -200,12 +200,12 @@ export const recentArticles: Article[] = [
   },
   {
     slug: 'market-map-catalysts-oncology-rare-disease',
-    category: 'Market',
-    categoryClass: 'category-market',
+    category: 'Markets',
+    categoryClass: 'category-markets',
     title: 'Market Map: Key Catalysts to Watch Across Oncology and Rare Disease',
     excerpt: 'A forward calendar of events that repeatedly move pricing, flows, and positioning.',
     author: 'BioIntel Research',
-    date: 'Dec 08, 2024',
+    date: 'Dec 08, 2025',
     readTime: '6 min read',
     deck:
       'A working calendar you can actually use—what tends to move prices, when positioning builds, and which catalysts are usually mispriced.',
@@ -251,12 +251,12 @@ export const recentArticles: Article[] = [
   },
   {
     slug: 'microcap-biotech-liquidity-matters',
-    category: 'Market',
-    categoryClass: 'category-market',
+    category: 'Markets',
+    categoryClass: 'category-markets',
     title: 'Why Microcap Biotech Liquidity Matters More Than the Thesis',
     excerpt: 'How float, holders, and financing terms reshape outcomes regardless of data.',
     author: 'BioIntel Research',
-    date: 'Dec 07, 2024',
+    date: 'Dec 07, 2025',
     readTime: '6 min read',
     content: [],
     popularity: 68,
@@ -264,12 +264,12 @@ export const recentArticles: Article[] = [
   },
   {
     slug: 'capital-formation-terms-signal-strength-vs-distress',
-    category: 'Market',
-    categoryClass: 'category-market',
+    category: 'Markets',
+    categoryClass: 'category-markets',
     title: 'Capital Formation: Terms That Signal Strength vs. Distress',
     excerpt: 'A practical guide to reading financing structures, covenants, and insider support.',
     author: 'BioIntel Research',
-    date: 'Dec 06, 2024',
+    date: 'Dec 06, 2025',
     readTime: '7 min read',
     content: [],
     popularity: 63,
@@ -282,7 +282,7 @@ export const recentArticles: Article[] = [
     title: 'AI-Native Biology: What’s Real vs. Demo-Ware',
     excerpt: 'A framework for evaluating model validity, data moats, and clinical translation.',
     author: 'BioIntel Research',
-    date: 'Dec 05, 2024',
+    date: 'Dec 05, 2025',
     readTime: '8 min read',
     content: [],
     popularity: 74,
@@ -295,7 +295,7 @@ export const recentArticles: Article[] = [
     title: 'Platform Shifts: Signals from the Next Wave of Screening Tech',
     excerpt: 'Where throughput improvements actually translate to better molecules—and where they don’t.',
     author: 'BioIntel Research',
-    date: 'Dec 04, 2024',
+    date: 'Dec 04, 2025',
     readTime: '7 min read',
     content: [],
     popularity: 59,
@@ -308,7 +308,7 @@ export const recentArticles: Article[] = [
     title: 'Reproducibility and Model Risk in Translational Datasets',
     excerpt: 'Common failure modes when training on curated biology and how to spot them early.',
     author: 'BioIntel Research',
-    date: 'Dec 03, 2024',
+    date: 'Dec 03, 2025',
     readTime: '9 min read',
     content: [],
     popularity: 66,

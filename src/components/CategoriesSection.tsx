@@ -1,24 +1,24 @@
-import { TrendingUp, Microscope, BarChart3, Newspaper, ArrowRight } from 'lucide-react';
+import { TrendingUp, Microscope, BarChart3, Scale, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const categories = [
   {
-    icon: Newspaper,
-    title: 'NEWS',
-    description: 'The latest industry updates, deals, and headlines',
-    link: '/news',
-  },
-  {
     icon: BarChart3,
-    title: 'ANALYSIS',
-    description: 'Deep dives into risk, catalysts, and what matters next',
-    link: '/analysis',
+    title: 'INDUSTRY',
+    description: 'The latest industry updates, deals, and headlines',
+    link: '/industry',
   },
   {
     icon: TrendingUp,
-    title: 'MARKET',
+    title: 'MARKETS',
     description: 'Pricing signals, capital flows, and market narratives',
-    link: '/market',
+    link: '/markets',
+  },
+  {
+    icon: Scale,
+    title: 'REGULATION',
+    description: 'FDA signals, regulatory shifts, and approval timelines',
+    link: '/regulation',
   },
   {
     icon: Microscope,
@@ -35,7 +35,7 @@ const CategoriesSection = () => {
         <h2 className="section-title">INTELLIGENCE BY CATEGORY</h2>
         <div className="section-divider" />
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-border">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
           {categories.map((category) => (
             <Link
               key={category.title}

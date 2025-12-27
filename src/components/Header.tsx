@@ -4,9 +4,9 @@ import { Menu, X } from 'lucide-react';
 import { useSubscribeModal } from './useSubscribeModal';
 
 const navItems = [
-  { label: 'NEWS', href: '/news' },
-  { label: 'ANALYSIS', href: '/analysis' },
-  { label: 'MARKET', href: '/market' },
+  { label: 'INDUSTRY', href: '/industry' },
+  { label: 'MARKETS', href: '/markets' },
+  { label: 'REGULATION', href: '/regulation' },
   { label: 'AI & SCIENCE', href: '/ai-science' },
   { label: 'ABOUT', href: '/about' },
 ];

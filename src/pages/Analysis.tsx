@@ -12,16 +12,16 @@ const Analysis = () => {
           <div className="container-main">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Analysis
+                Regulation
               </h1>
               <p className="mt-4 text-base lg:text-lg text-muted-foreground">
-                Deep dives into biotech risk, science, and capital covering catalysts, trial design, competitive landscapes, and what matters next.
+                Regulatory updates and signals—FDA actions, timelines, holds, labels, and what changes probability.
               </p>
             </div>
           </div>
         </section>
-        <HeroSection category="Analysis" />
-        <FeaturedContentSection category="Analysis" />
+        <HeroSection category="Regulation" />
+        <FeaturedContentSection category="Regulation" />
       </main>
       <Footer />
     </div>

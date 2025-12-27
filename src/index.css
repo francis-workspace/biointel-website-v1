@@ -154,6 +154,18 @@
     @apply bg-transparent border-accent text-accent;
   }
 
+  .category-industry {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-markets {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-regulation {
+    @apply bg-transparent border-accent text-accent;
+  }
+
   .category-ai {
     @apply bg-transparent border-accent text-accent;
   }

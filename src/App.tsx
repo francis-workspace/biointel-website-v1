@@ -33,6 +33,9 @@ const App = () => (
           <ScrollToHero />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/industry" element={<News />} />
+            <Route path="/markets" element={<Market />} />
+            <Route path="/regulation" element={<Analysis />} />
             <Route path="/news" element={<News />} />
             <Route path="/analysis" element={<Analysis />} />
             <Route path="/market" element={<Market />} />
