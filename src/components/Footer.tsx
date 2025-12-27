@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Youtube, Linkedin, Twitter } from 'lucide-react';
 
 const contentLinks = [
@@ -6,14 +7,12 @@ const contentLinks = [
   { label: 'Analysis', href: '/analysis' },
   { label: 'Market', href: '/market' },
   { label: 'AI & Science', href: '/ai-science' },
-  { label: 'Archive', href: '/archive' },
 ];
 
 const aboutLinks = [
   { label: 'Our Mission', href: '/about' },
   { label: 'Editorial Policy', href: '/editorial-policy' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Careers', href: '/careers' },
 ];
 
 const Footer = () => {
@@ -31,9 +30,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           {/* Logo & Tagline */}
           <div>
-            <a href="/" className="font-display text-2xl font-bold mb-4 inline-block">
+            <Link to="/" className="font-display text-2xl font-bold mb-4 inline-block">
               BioIntel
-            </a>
+            </Link>
             <p className="text-primary-foreground/70 text-sm">
               Independent biotech intelligence
             </p>
@@ -44,13 +43,13 @@ const Footer = () => {
             <h3 className="text-xs font-bold uppercase tracking-widest mb-4">Content</h3>
             <nav className="flex flex-col gap-2">
               {contentLinks.map((link) => (
-                <a 
+                <Link 
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

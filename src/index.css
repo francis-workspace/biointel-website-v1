@@ -146,19 +146,15 @@
     @apply bg-transparent border-accent text-accent;
   }
 
-  .category-risk {
+  .category-news {
     @apply bg-transparent border-accent text-accent;
   }
 
-  .category-capital {
+  .category-analysis {
     @apply bg-transparent border-accent text-accent;
   }
 
-  .category-science {
-    @apply bg-transparent border-accent text-accent;
-  }
-
-  .category-executive {
+  .category-ai {
     @apply bg-transparent border-accent text-accent;
   }
 

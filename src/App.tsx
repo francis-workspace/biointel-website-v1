@@ -6,12 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SubscribeModal from "./components/SubscribeModal";
 import { SubscribeModalProvider } from "./components/SubscribeModalProvider";
 import { useSubscribeModal } from "./components/useSubscribeModal";
+import ScrollToHero from "./components/ScrollToHero";
 import Index from "./pages/Index";
 import News from "./pages/News";
 import Analysis from "./pages/Analysis";
 import Market from "./pages/Market";
 import AiScience from "./pages/AiScience";
 import About from "./pages/About";
+import Article from "./pages/Article";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,7 @@ const App = () => (
       <Sonner />
       <SubscribeModalProvider>
         <BrowserRouter>
+          <ScrollToHero />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/news" element={<News />} />
@@ -35,6 +38,7 @@ const App = () => (
             <Route path="/market" element={<Market />} />
             <Route path="/ai-science" element={<AiScience />} />
             <Route path="/about" element={<About />} />
+            <Route path="/article/:slug" element={<Article />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

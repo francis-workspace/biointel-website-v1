@@ -1,64 +1,39 @@
 import { useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { featuredArticle, getScopedArticles, recentArticles, type Article, type PillarCategory } from '@/data/articles';
+import blogThumbnails from '@/images/blog-thumbnails.webp';
 
-const featuredArticle = {
-  category: 'MARKET INTELLIGENCE',
-  categoryClass: 'category-market',
-  title: 'Why Series A Valuations Are Diverging From Clinical Data',
-  excerpt: 'Analysis of 200+ biotech funding rounds reveals a widening gap between scientific promise and market pricing. Here\'s what\'s driving the disconnect and what it means for Q1 dealmaking...',
-  author: 'BioIntel Research',
-  date: 'Dec 15, 2024',
-  readTime: '8 min read',
-  link: '/article/series-a-valuations',
+type FeaturedContentSectionProps = {
+  category?: PillarCategory;
 };
 
-const recentArticles = [
-  {
-    category: 'EXECUTIVE BRIEFING',
-    categoryClass: 'category-executive',
-    title: 'Gene Therapy M&A: Pattern Analysis From 50+ Deals',
-    excerpt: 'Strategic buyers are prioritizing platform technology over single-asset plays...',
-    author: 'BioIntel Research',
-    date: 'Dec 14, 2024',
-    readTime: '6 min read',
-    popularity: 72,
-    link: '/article/gene-therapy-ma',
-  },
-  {
-    category: 'RISK REPORT',
-    categoryClass: 'category-risk',
-    title: 'What 500 Phase III Trials Reveal About Predictable Failure',
-    excerpt: 'Endpoint selection errors account for 43% of late-stage clinical failures...',
-    author: 'BioIntel Research',
-    date: 'Dec 13, 2024',
-    readTime: '10 min read',
-    popularity: 91,
-    hasImage: false,
-    link: '/article/phase-iii-failures',
-  },
-  {
-    category: 'CAPITAL ANALYSIS',
-    categoryClass: 'category-capital',
-    title: 'Institutional Money Movement: Q4 Portfolio Repositioning',
-    excerpt: 'Top-tier funds are shifting allocation models based on three key signals...',
-    author: 'BioIntel Research',
-    date: 'Dec 12, 2024',
-    readTime: '7 min read',
-    popularity: 64,
-    link: '/article/institutional-money',
-  },
-];
-
-const FeaturedContentSection = () => {
+const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
   const [filter, setFilter] = useState<'latest' | 'popular'>('latest');
+
+  const scopedArticles = useMemo(() => {
+    return getScopedArticles(category);
+  }, [category]);
+
+  const scopedFeaturedArticle = useMemo(() => {
+    if (!category) return featuredArticle;
+    return scopedArticles[0] ?? featuredArticle;
+  }, [category, scopedArticles]);
+
+  const scopedRecentArticles = useMemo(() => {
+    if (!category) return recentArticles;
+    return scopedArticles
+      .filter((a) => a.title !== scopedFeaturedArticle.title)
+      .map((a) => ({ ...a, popularity: a.popularity ?? 0 }));
+  }, [category, scopedArticles, scopedFeaturedArticle.title]);
 
   const filteredRecentArticles = useMemo(() => {
     if (filter === 'popular') {
-      return [...recentArticles].sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0));
+      return [...scopedRecentArticles].sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0));
     }
 
-    return recentArticles;
-  }, [filter]);
+    return scopedRecentArticles;
+  }, [filter, scopedRecentArticles]);
 
   return (
     <section className="py-16 lg:py-24 bg-secondary/30">
@@ -96,36 +71,39 @@ const FeaturedContentSection = () => {
         <article className="mb-8 pb-8 border-b border-border">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             <div className="lg:col-span-4">
-              <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-                <span className="text-4xl font-display text-foreground/20">BI</span>
-              </div>
+              <img
+                src={blogThumbnails}
+                alt="Blog thumbnail"
+                className="aspect-video w-full border border-border object-cover"
+                loading="lazy"
+              />
             </div>
             
             <div className="lg:col-span-8">
-              <span className={`category-tag ${featuredArticle.categoryClass} mb-4 inline-block`}>
-                {featuredArticle.category}
+              <span className={`category-tag ${scopedFeaturedArticle.categoryClass} mb-4 inline-block`}>
+                {scopedFeaturedArticle.category}
               </span>
               
               <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4 hover:text-accent transition-colors">
-                <a href={featuredArticle.link}>{featuredArticle.title}</a>
+                <Link to={scopedFeaturedArticle.link}>{scopedFeaturedArticle.title}</Link>
               </h3>
               
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                {featuredArticle.excerpt}
+                {scopedFeaturedArticle.excerpt}
               </p>
               
               <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                <span>{featuredArticle.author}</span>
+                <span>{scopedFeaturedArticle.author}</span>
                 <span>•</span>
-                <span>{featuredArticle.date}</span>
+                <span>{scopedFeaturedArticle.date}</span>
                 <span>•</span>
-                <span>{featuredArticle.readTime}</span>
+                <span>{scopedFeaturedArticle.readTime}</span>
               </div>
               
-              <a href={featuredArticle.link} className="arrow-link">
-                READ FULL ANALYSIS
+              <Link to={scopedFeaturedArticle.link} className="arrow-link">
+                READ MORE
                 <ArrowRight className="w-3 h-3" />
-              </a>
+              </Link>
             </div>
           </div>
         </article>
@@ -140,9 +118,12 @@ const FeaturedContentSection = () => {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
                 {article.hasImage !== false && (
                   <div className="lg:col-span-4">
-                    <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-                      <span className="text-4xl font-display text-foreground/20">BI</span>
-                    </div>
+                    <img
+                      src={blogThumbnails}
+                      alt="Blog thumbnail"
+                      className="aspect-video w-full border border-border object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 )}
 
@@ -152,7 +133,7 @@ const FeaturedContentSection = () => {
                   </span>
 
                   <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4 hover:text-accent transition-colors">
-                    <a href={article.link}>{article.title}</a>
+                    <Link to={article.link}>{article.title}</Link>
                   </h3>
 
                   <p className="text-muted-foreground mb-4 leading-relaxed">

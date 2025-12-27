@@ -1,35 +1,30 @@
-import { TrendingUp, Microscope, BarChart3, Building2, FileText, ArrowRight } from 'lucide-react';
+import { TrendingUp, Microscope, BarChart3, Newspaper, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const categories = [
   {
+    icon: Newspaper,
+    title: 'NEWS',
+    description: 'The latest industry updates, deals, and headlines',
+    link: '/news',
+  },
+  {
+    icon: BarChart3,
+    title: 'ANALYSIS',
+    description: 'Deep dives into risk, catalysts, and what matters next',
+    link: '/analysis',
+  },
+  {
     icon: TrendingUp,
-    title: 'MARKET INTELLIGENCE',
-    description: 'Funding, M&A, IPO trends, capital flow analysis',
+    title: 'MARKET',
+    description: 'Pricing signals, capital flows, and market narratives',
     link: '/market',
   },
   {
     icon: Microscope,
-    title: 'SCIENTIFIC SIGNALS',
-    description: 'Breakthroughs, platform shifts, AI + biology',
+    title: 'AI & SCIENCE',
+    description: 'AI-native tools, biology signals, and research-backed coverage',
     link: '/ai-science',
-  },
-  {
-    icon: BarChart3,
-    title: 'RISK & PROBABILITY',
-    description: 'Trial failure patterns, capital mispricing',
-    link: '/analysis',
-  },
-  {
-    icon: Building2,
-    title: 'COMPANY SPOTLIGHTS',
-    description: 'Strategic analysis of biotech companies',
-    link: '/companies',
-  },
-  {
-    icon: FileText,
-    title: 'EXECUTIVE BRIEF',
-    description: 'CEO, investor, and operator insights',
-    link: '/executive',
   },
 ];
 
@@ -42,9 +37,9 @@ const CategoriesSection = () => {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-border">
           {categories.map((category) => (
-            <a
+            <Link
               key={category.title}
-              href={category.link}
+              to={category.link}
               className="bg-background p-6 lg:p-8 group hover:bg-secondary/50 transition-colors"
             >
               <category.icon className="w-6 h-6 text-muted-foreground mb-4 group-hover:text-accent transition-colors" />
@@ -61,7 +56,7 @@ const CategoriesSection = () => {
                 VIEW ALL
                 <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

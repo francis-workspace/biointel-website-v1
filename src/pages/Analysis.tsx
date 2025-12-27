@@ -8,7 +8,7 @@ const Analysis = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        <section className="py-12 lg:py-16 bg-background">
+        <section id="hero" className="py-12 lg:py-16 bg-background">
           <div className="container-main">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
@@ -20,8 +20,8 @@ const Analysis = () => {
             </div>
           </div>
         </section>
-        <HeroSection />
-        <FeaturedContentSection />
+        <HeroSection category="Analysis" />
+        <FeaturedContentSection category="Analysis" />
       </main>
       <Footer />
     </div>

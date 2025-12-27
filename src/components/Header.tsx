@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Menu, X, Search } from 'lucide-react';
+import { Link, NavLink } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import { useSubscribeModal } from './useSubscribeModal';
 
 const navItems = [
@@ -20,9 +20,9 @@ const Header = () => {
       <div className="container-main">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="/" className="font-display text-2xl lg:text-3xl font-bold text-foreground tracking-tight">
+          <Link to="/" className="font-display text-2xl lg:text-3xl font-bold text-foreground tracking-tight">
             BioIntel
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
@@ -39,12 +39,6 @@ const Header = () => {
 
           {/* Desktop Right Side */}
           <div className="hidden lg:flex items-center gap-4">
-            <button 
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Search"
-            >
-              <Search className="w-5 h-5" />
-            </button>
             <button
               type="button"
               className="btn-outline text-xs py-2 px-4"
@@ -84,10 +78,6 @@ const Header = () => {
               </NavLink>
             ))}
             <div className="mt-6 flex flex-col gap-4">
-              <button className="flex items-center gap-2 text-muted-foreground">
-                <Search className="w-5 h-5" />
-                <span>Search</span>
-              </button>
               <button
                 type="button"
                 className="btn-primary w-full text-center"

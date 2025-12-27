@@ -22,7 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-.windsurf
-.rules
-.project-rules.md
+ 
+ 
+# .windsurf
+# .rules
+# .project-rules.md

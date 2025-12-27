@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Check, X } from 'lucide-react';
+import { useEffect } from 'react';
+import { X } from 'lucide-react';
 
 type SubscribeModalProps = {
   isOpen: boolean;
@@ -7,10 +7,19 @@ type SubscribeModalProps = {
 };
 
 const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
-  const [email, setEmail] = useState('');
-
   useEffect(() => {
     if (!isOpen) return;
+
+    const existing = document.querySelector(
+      'script[src="https://subscribe-forms.beehiiv.com/embed.js"]'
+    );
+
+    if (!existing) {
+      const script = document.createElement('script');
+      script.src = 'https://subscribe-forms.beehiiv.com/embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -19,16 +28,6 @@ const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, onClose]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    window.open(
-      `https://thebiointel.beehiiv.com/subscribe?email=${encodeURIComponent(email)}`,
-      '_blank'
-    );
-    setEmail('');
-    onClose();
-  };
 
   if (!isOpen) return null;
 
@@ -47,13 +46,7 @@ const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
           role="dialog"
           aria-modal="true"
         >
-          <div className="flex items-start justify-between p-5 border-b border-border">
-            <div>
-              <h2 className="text-lg font-bold text-foreground">Join 1,000+ Biotech Leaders</h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Weekly intelligence on market moves, funding signals, and risk analysis—no fluff
-              </p>
-            </div>
+          <div className="flex items-start justify-end p-3">
             <button
               type="button"
               className="p-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -65,35 +58,23 @@ const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
           </div>
 
           <div className="p-6 lg:p-8">
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 mb-6">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                autoFocus
-                className="input-field flex-1"
-              />
-              <button type="submit" className="btn-primary shrink-0">
-                SUBSCRIBE
-              </button>
-            </form>
-
-            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <Check className="w-4 h-4 text-accent" />
-                Unsubscribe anytime
-              </span>
-              <span className="flex items-center gap-1">
-                <Check className="w-4 h-4 text-accent" />
-                No spam
-              </span>
-              <span className="flex items-center gap-1">
-                <Check className="w-4 h-4 text-accent" />
-                Editorial independence
-              </span>
-            </div>
+            <iframe
+              src="https://subscribe-forms.beehiiv.com/4e2ff8db-5fc9-4167-a023-4a67f9e055d6"
+              className="beehiiv-embed w-full"
+              data-test-id="beehiiv-embed"
+              frameBorder={0}
+              scrolling="no"
+              style={{
+                width: '573px',
+                height: '263px',
+                margin: 0,
+                borderRadius: '0px 0px 0px 0px',
+                backgroundColor: 'transparent',
+                boxShadow: '0 0 #0000',
+                maxWidth: '100%'
+              }}
+              title="Subscribe"
+            />
           </div>
         </div>
       </div>
