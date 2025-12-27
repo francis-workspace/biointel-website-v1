@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background & Surface */
+    --background: 0 0% 100%;
+    --foreground: 220 13% 13%;
+    
+    --card: 210 20% 98%;
+    --card-foreground: 220 13% 13%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 13%;
+    
+    /* Primary - Deep Navy */
+    --primary: 220 26% 14%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - Light Gray */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 13% 13%;
+    
+    /* Muted */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    
+    /* Accent - Electric Blue */
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Category Colors */
+    --category-market: 217 91% 60%;
+    --category-risk: 258 90% 66%;
+    --category-capital: 24 95% 53%;
+    --category-science: 168 76% 42%;
+    --category-executive: 160 84% 39%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Structure */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+    
+    --radius: 0.25rem;
+    
+    /* Sidebar */
+    --sidebar-background: 220 26% 14%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 20% 25%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  .dark {
+    --background: 220 26% 14%;
+    --foreground: 210 20% 98%;
+    
+    --card: 220 20% 18%;
+    --card-foreground: 210 20% 98%;
+    
+    --popover: 220 26% 14%;
+    --popover-foreground: 210 20% 98%;
+    
+    --primary: 210 20% 98%;
+    --primary-foreground: 220 26% 14%;
+    
+    --secondary: 220 20% 20%;
+    --secondary-foreground: 210 20% 98%;
+    
+    --muted: 220 20% 20%;
+    --muted-foreground: 220 9% 65%;
+    
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 20% 98%;
+    
+    --border: 220 20% 25%;
+    --input: 220 20% 25%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-sm font-bold uppercase tracking-widest text-foreground mb-6;
+    letter-spacing: 0.1em;
+  }
+
+  .section-divider {
+    @apply w-full h-px bg-border mb-8;
+  }
+
+  .container-main {
+    @apply max-w-7xl mx-auto px-6 lg:px-10;
+  }
+
+  .nav-link {
+    @apply text-xs font-semibold uppercase tracking-wider text-muted-foreground 
+           hover:text-foreground transition-colors duration-200;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-link-active {
+    @apply text-foreground;
+  }
+
+  .data-point {
+    @apply text-3xl lg:text-4xl font-bold;
+  }
+
+  .card-intel {
+    @apply bg-card border border-border p-8 transition-colors duration-200 hover:bg-secondary/50;
+  }
+
+  .category-tag {
+    @apply inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded-full border;
+    letter-spacing: 0.1em;
+  }
+
+  .category-market {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-risk {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-capital {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-science {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-executive {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .arrow-link {
+    @apply text-xs font-semibold uppercase tracking-wider text-muted-foreground 
+           hover:text-accent transition-colors duration-200 inline-flex items-center gap-1;
+    letter-spacing: 0.08em;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold uppercase 
+           tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 
+           transition-colors duration-200;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold uppercase 
+           tracking-wider border border-foreground text-foreground bg-transparent 
+           hover:bg-foreground hover:text-background transition-colors duration-200;
+    letter-spacing: 0.05em;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-background border border-border text-foreground 
+           placeholder:text-muted-foreground focus:outline-none focus:border-accent 
+           transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
