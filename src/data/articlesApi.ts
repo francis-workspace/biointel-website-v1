@@ -7,6 +7,8 @@ import {
   type PillarCategory,
 } from '@/data/articles';
 
+const isDemoMode = () => import.meta.env.VITE_DEMO_MODE === 'true';
+
 type DbArticleRow = {
   slug: string;
   category: PillarCategory;
@@ -45,7 +47,7 @@ const mapRowToArticle = (row: DbArticleRow): Article => {
 };
 
 const useSupabaseEnabled = () => {
-  return !!supabase;
+  return !!supabase && !isDemoMode();
 };
 
 export const useFeaturedArticle = (category?: PillarCategory) => {
@@ -75,7 +77,13 @@ export const useFeaturedArticle = (category?: PillarCategory) => {
 
       if (error) throw error;
       const first = (data?.[0] as DbArticleRow | undefined) ?? undefined;
-      if (!first) return fallbackFeaturedArticle;
+      if (!first) {
+        if (!category) return fallbackFeaturedArticle;
+        return (
+          fallbackRecentArticles.find((a) => a.category === category) ??
+          fallbackFeaturedArticle
+        );
+      }
       return mapRowToArticle(first);
     },
   });
@@ -105,7 +113,15 @@ export const useRecentArticles = (category?: PillarCategory) => {
 
       const { data, error } = await q;
       if (error) throw error;
-      return (data as DbArticleRow[]).map(mapRowToArticle);
+      const rows = (data as DbArticleRow[] | null) ?? [];
+
+      if (rows.length === 0) {
+        return category
+          ? fallbackRecentArticles.filter((a) => a.category === category)
+          : fallbackRecentArticles;
+      }
+
+      return rows.map(mapRowToArticle);
     },
   });
 };
@@ -135,7 +151,10 @@ export const useArticleBySlug = (slug?: string) => {
 
       if (error) throw error;
       const first = (data?.[0] as DbArticleRow | undefined) ?? undefined;
-      if (!first) return null;
+      if (!first) {
+        const all = [fallbackFeaturedArticle, ...fallbackRecentArticles];
+        return all.find((a) => a.slug === slug) ?? null;
+      }
       return mapRowToArticle(first);
     },
   });
