@@ -1,8 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { featuredArticle, getScopedArticles, recentArticles, type Article, type PillarCategory } from '@/data/articles';
-import blogThumbnails from '@/images/blog-thumbnails.webp';
 
 type FeaturedContentSectionProps = {
   category?: PillarCategory;
@@ -10,6 +9,9 @@ type FeaturedContentSectionProps = {
 
 const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
   const [filter, setFilter] = useState<'latest' | 'popular'>('latest');
+  const [showAll, setShowAll] = useState(false);
+  const fallbackImageUrl =
+    'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb';
 
   const scopedArticles = useMemo(() => {
     return getScopedArticles(category);
@@ -34,6 +36,15 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
 
     return scopedRecentArticles;
   }, [filter, scopedRecentArticles]);
+
+  useEffect(() => {
+    setShowAll(false);
+  }, [category, filter]);
+
+  const visibleRecentArticles = useMemo(() => {
+    if (showAll) return filteredRecentArticles;
+    return filteredRecentArticles.slice(0, 10);
+  }, [filteredRecentArticles, showAll]);
 
   return (
     <section className="py-16 lg:py-24 bg-secondary/30">
@@ -72,8 +83,8 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             <div className="lg:col-span-4">
               <img
-                src={blogThumbnails}
-                alt="Blog thumbnail"
+                src={scopedFeaturedArticle.imageUrl ?? fallbackImageUrl}
+                alt={scopedFeaturedArticle.title}
                 className="aspect-video w-full border border-border object-cover"
                 loading="lazy"
               />
@@ -110,17 +121,17 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
         
         {/* Recent Articles List */}
         <div className="space-y-0">
-          {filteredRecentArticles.map((article, index) => (
+          {visibleRecentArticles.map((article, index) => (
             <article 
               key={article.title} 
-              className={`py-6 ${index !== filteredRecentArticles.length - 1 ? 'border-b border-border' : ''}`}
+              className={`py-6 ${index !== visibleRecentArticles.length - 1 ? 'border-b border-border' : ''}`}
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
                 {article.hasImage !== false && (
                   <div className="lg:col-span-4">
                     <img
-                      src={blogThumbnails}
-                      alt="Blog thumbnail"
+                      src={article.imageUrl ?? fallbackImageUrl}
+                      alt={article.title}
                       className="aspect-video w-full border border-border object-cover"
                       loading="lazy"
                     />
@@ -153,11 +164,17 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
           ))}
         </div>
 
-        <div className="mt-10 w-full">
-          <button type="button" className="btn-outline text-xs py-3 px-5 w-full text-center">
-            VIEW MORE
-          </button>
-        </div>
+        {!showAll && filteredRecentArticles.length > 10 && (
+          <div className="mt-10 w-full">
+            <button
+              type="button"
+              className="btn-outline text-xs py-3 px-5 w-full text-center"
+              onClick={() => setShowAll(true)}
+            >
+              VIEW MORE
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

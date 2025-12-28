@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { featuredArticle, recentArticles, type PillarCategory } from '@/data/articles';
-import blogThumbnails from '@/images/blog-thumbnails.webp';
 import authorAvatar from '@/images/luffy.webp';
 
 type HeroSectionProps = {
@@ -9,6 +8,9 @@ type HeroSectionProps = {
 };
 
 const HeroSection = ({ category }: HeroSectionProps) => {
+  const fallbackImageUrl =
+    'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb';
+
   const scopedLatestItems = category
     ? recentArticles.filter((a) => a.category === category).slice(0, 3)
     : recentArticles.slice(0, 3);
@@ -29,12 +31,14 @@ const HeroSection = ({ category }: HeroSectionProps) => {
                   to={item.link}
                   className="group flex gap-4 rounded-xl border border-border bg-background hover:border-accent transition-colors p-4"
                 >
-                  <img
-                    src={blogThumbnails}
-                    alt="Blog thumbnail"
-                    className="w-16 h-16 rounded-lg border border-border shrink-0 object-cover"
-                    loading="lazy"
-                  />
+                  {item.hasImage !== false && (
+                    <img
+                      src={item.imageUrl ?? fallbackImageUrl}
+                      alt={item.title}
+                      className="w-16 h-16 rounded-lg border border-border shrink-0 object-cover"
+                      loading="lazy"
+                    />
+                  )}
                   <div className="min-w-0">
                     <h3 className="font-semibold text-foreground leading-snug max-h-11 overflow-hidden group-hover:text-accent transition-colors">
                       {item.title}
@@ -64,8 +68,16 @@ const HeroSection = ({ category }: HeroSectionProps) => {
               to={scopedFeaturedItem.link}
               className="group relative block overflow-hidden rounded-2xl border border-border bg-foreground"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-foreground via-foreground to-foreground/80" />
-              <div className="absolute inset-0 opacity-35 bg-gradient-to-tr from-primary/30 via-transparent to-muted/20" />
+              {scopedFeaturedItem.hasImage !== false && (
+                <img
+                  src={scopedFeaturedItem.imageUrl ?? fallbackImageUrl}
+                  alt={scopedFeaturedItem.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+              )}
+              <div className="absolute inset-0 bg-black/55" />
+              <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/70" />
               <div className="relative p-6 sm:p-8 lg:p-10 min-h-[320px] sm:min-h-[360px] flex flex-col justify-end">
                 <div className="text-xs font-semibold tracking-wide text-background/70 uppercase">
                   Featured

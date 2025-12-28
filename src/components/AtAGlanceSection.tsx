@@ -7,8 +7,8 @@ const intelligenceCards = [
     dataPoint: '↑ 34%',
     headline: 'Q4 Funding Trends',
     description: 'Institutional capital shifts toward AI-enabled platforms',
-    link: '/markets',
-    linkText: 'VIEW MARKETS',
+    link: '/healthcare-investment',
+    linkText: 'VIEW INVESTMENT',
     accentColor: 'text-category-market',
   },
   {
@@ -17,8 +17,8 @@ const intelligenceCards = [
     dataPoint: '67%',
     headline: 'Phase II Failure Rate',
     description: 'Concentrated in three predictable categories',
-    link: '/industry',
-    linkText: 'VIEW INDUSTRY',
+    link: '/biopharma-industry',
+    linkText: 'VIEW BIOPHARMA',
     accentColor: 'text-category-risk',
   },
   {
@@ -27,8 +27,8 @@ const intelligenceCards = [
     dataPoint: '$2.3B',
     headline: 'New Deal Volume',
     description: 'Where investors are placing bets this quarter',
-    link: '/markets',
-    linkText: 'VIEW MARKETS',
+    link: '/healthcare-investment',
+    linkText: 'VIEW INVESTMENT',
     accentColor: 'text-category-capital',
   },
   {
@@ -37,8 +37,8 @@ const intelligenceCards = [
     dataPoint: '12',
     headline: 'AI Trial Milestones',
     description: 'Breakthrough vs hype in latest clinical data',
-    link: '/ai-science/trial-milestones',
-    linkText: 'DEEP DIVE',
+    link: '/ai-drug-discovery',
+    linkText: 'VIEW AI',
     accentColor: 'text-category-science',
   },
 ];

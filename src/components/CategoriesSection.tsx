@@ -1,30 +1,42 @@
-import { TrendingUp, Microscope, BarChart3, Scale, ArrowRight } from 'lucide-react';
+import { TrendingUp, Microscope, BarChart3, Scale, Cpu, Stethoscope, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const categories = [
   {
+    icon: Cpu,
+    title: 'AI IN DRUG DISCOVERY',
+    description: 'Machine learning, predictive models, and computational biology',
+    link: '/ai-drug-discovery',
+  },
+  {
     icon: BarChart3,
-    title: 'INDUSTRY',
-    description: 'The latest industry updates, deals, and headlines',
-    link: '/industry',
-  },
-  {
-    icon: TrendingUp,
-    title: 'MARKETS',
-    description: 'Pricing signals, capital flows, and market narratives',
-    link: '/markets',
-  },
-  {
-    icon: Scale,
-    title: 'REGULATION',
-    description: 'FDA signals, regulatory shifts, and approval timelines',
-    link: '/regulation',
+    title: 'BIOPHARMACEUTICAL INDUSTRY',
+    description: 'Drug development, clinical trials, and industry signals',
+    link: '/biopharma-industry',
   },
   {
     icon: Microscope,
-    title: 'AI & SCIENCE',
-    description: 'AI-native tools, biology signals, and research-backed coverage',
-    link: '/ai-science',
+    title: 'BIOTECH INNOVATION',
+    description: 'Gene therapy, CRISPR, synthetic biology, and emerging tech',
+    link: '/biotech-innovation',
+  },
+  {
+    icon: TrendingUp,
+    title: 'HEALTHCARE INVESTMENT',
+    description: 'Funding, M&A, IPOs, and market analysis',
+    link: '/healthcare-investment',
+  },
+  {
+    icon: Stethoscope,
+    title: 'MEDICAL TECHNOLOGY',
+    description: 'Digital health, diagnostics, and medical devices',
+    link: '/medical-technology',
+  },
+  {
+    icon: Scale,
+    title: 'REGULATORY & POLICY',
+    description: 'FDA approvals, healthcare policy, and compliance',
+    link: '/regulatory-policy',
   },
 ];
 
@@ -35,7 +47,7 @@ const CategoriesSection = () => {
         <h2 className="section-title">INTELLIGENCE BY CATEGORY</h2>
         <div className="section-divider" />
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
           {categories.map((category) => (
             <Link
               key={category.title}

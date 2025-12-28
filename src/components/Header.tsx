@@ -3,13 +3,16 @@ import { Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useSubscribeModal } from './useSubscribeModal';
 
-const navItems = [
-  { label: 'INDUSTRY', href: '/industry' },
-  { label: 'MARKETS', href: '/markets' },
-  { label: 'REGULATION', href: '/regulation' },
-  { label: 'AI & SCIENCE', href: '/ai-science' },
-  { label: 'ABOUT', href: '/about' },
+const pillarItems = [
+  { label: 'AI IN DRUG DISCOVERY', href: '/ai-drug-discovery' },
+  { label: 'BIOPHARMACEUTICAL INDUSTRY', href: '/biopharma-industry' },
+  { label: 'BIOTECH INNOVATION', href: '/biotech-innovation' },
+  { label: 'HEALTHCARE INVESTMENT', href: '/healthcare-investment' },
+  { label: 'MEDICAL TECHNOLOGY', href: '/medical-technology' },
+  { label: 'REGULATORY & POLICY', href: '/regulatory-policy' },
 ];
+
+const utilityItems = [{ label: 'ABOUT', href: '/about' }];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,21 +27,19 @@ const Header = () => {
             BioIntel
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.label}
-                to={item.href}
-                className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}
-              >
-                {item.label}
-              </NavLink>
-            ))}
-          </nav>
-
-          {/* Desktop Right Side */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* Desktop Right Side (Utility) */}
+          <div className="hidden lg:flex items-center gap-6">
+            <nav className="flex items-center gap-6">
+              {utilityItems.map((item) => (
+                <NavLink
+                  key={item.label}
+                  to={item.href}
+                  className={({ isActive }) => `nav-link ${isActive ? 'nav-link-active' : ''}`}
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
             <button
               type="button"
               className="btn-outline text-xs py-2 px-4"
@@ -59,11 +60,36 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Content Pillars Bar */}
+      <div className="border-t border-border bg-[#1c1f26]">
+        <div className="container-main">
+          <nav
+            aria-label="Content pillars"
+            className="flex items-center gap-2 py-2 overflow-x-auto whitespace-nowrap lg:justify-center lg:overflow-x-visible"
+          >
+            {pillarItems.map((item) => (
+              <NavLink
+                key={item.label}
+                to={item.href}
+                className={({ isActive }) =>
+                  `px-3 py-2 text-[11px] uppercase tracking-wide rounded-md transition-colors border ` +
+                  (isActive
+                    ? 'text-white border-white bg-white/10'
+                    : 'text-white/70 border-transparent hover:border-white/30 hover:bg-white/5')
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+      </div>
+
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 bg-background z-40">
+        <div className="lg:hidden fixed inset-0 top-28 bg-background z-40">
           <nav className="flex flex-col p-6">
-            {navItems.map((item) => (
+            {[...pillarItems, ...utilityItems].map((item) => (
               <NavLink
                 key={item.label}
                 to={item.href}

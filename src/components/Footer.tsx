@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import { Youtube, Linkedin, Twitter } from 'lucide-react';
 
 const contentLinks = [
-  { label: 'Industry', href: '/industry' },
-  { label: 'Markets', href: '/markets' },
-  { label: 'Regulation', href: '/regulation' },
-  { label: 'AI & Science', href: '/ai-science' },
+  { label: 'AI in Drug Discovery', href: '/ai-drug-discovery' },
+  { label: 'Biopharmaceutical Industry', href: '/biopharma-industry' },
+  { label: 'Biotech Innovation', href: '/biotech-innovation' },
+  { label: 'Healthcare Investment', href: '/healthcare-investment' },
+  { label: 'Medical Technology', href: '/medical-technology' },
+  { label: 'Regulatory & Policy', href: '/regulatory-policy' },
 ];
 
 const aboutLinks = [
@@ -96,13 +98,13 @@ const Footer = () => {
         <div className="pt-8 border-t border-primary-foreground/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/50">
           <p>© 2024 BioIntel. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <a href="/privacy" className="hover:text-primary-foreground transition-colors">
+            <Link to="/privacy" className="hover:text-primary-foreground transition-colors">
               Privacy Policy
-            </a>
+            </Link>
             <span>•</span>
-            <a href="/terms" className="hover:text-primary-foreground transition-colors">
+            <Link to="/terms" className="hover:text-primary-foreground transition-colors">
               Terms of Use
-            </a>
+            </Link>
           </div>
         </div>
       </div>

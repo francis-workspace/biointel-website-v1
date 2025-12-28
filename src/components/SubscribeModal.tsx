@@ -10,17 +10,6 @@ const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    const existing = document.querySelector(
-      'script[src="https://subscribe-forms.beehiiv.com/embed.js"]'
-    );
-
-    if (!existing) {
-      const script = document.createElement('script');
-      script.src = 'https://subscribe-forms.beehiiv.com/embed.js';
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
@@ -65,8 +54,8 @@ const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
               frameBorder={0}
               scrolling="no"
               style={{
-                width: '573px',
-                height: '263px',
+                width: '604px',
+                height: '294px',
                 margin: 0,
                 borderRadius: '0px 0px 0px 0px',
                 backgroundColor: 'transparent',
@@ -74,6 +63,7 @@ const SubscribeModal = ({ isOpen, onClose }: SubscribeModalProps) => {
                 maxWidth: '100%'
               }}
               title="Subscribe"
+              loading="eager"
             />
           </div>
         </div>

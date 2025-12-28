@@ -2,12 +2,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useParams } from 'react-router-dom';
 import { getArticleBySlug } from '@/data/articles';
-import blogThumbnails from '@/images/blog-thumbnails.webp';
 import authorAvatar from '@/images/luffy.webp';
 
 const Article = () => {
   const { slug } = useParams();
   const article = slug ? getArticleBySlug(slug) : undefined;
+  const fallbackImageUrl =
+    'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb';
 
   if (!article) {
     return (
@@ -42,8 +43,8 @@ const Article = () => {
               {article.hasImage !== false && (
                 <div className="mb-8">
                   <img
-                    src={blogThumbnails}
-                    alt="Blog thumbnail"
+                    src={article.imageUrl ?? fallbackImageUrl}
+                    alt={article.title}
                     className="aspect-[16/9] w-full border border-border object-cover"
                     loading="lazy"
                   />
@@ -100,6 +101,20 @@ const Article = () => {
                       <h2 key={block.key} className="text-xl lg:text-2xl font-bold text-foreground">
                         {block.text}
                       </h2>
+                    );
+                  }
+
+                  if (block.type === 'link') {
+                    return (
+                      <a
+                        key={block.key}
+                        href={block.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-semibold text-accent hover:underline"
+                      >
+                        {block.text}
+                      </a>
                     );
                   }
 

@@ -170,6 +170,30 @@
     @apply bg-transparent border-accent text-accent;
   }
 
+  .category-ai-drug-discovery {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-biopharma-industry {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-biotech-innovation {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-healthcare-investment {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-medical-technology {
+    @apply bg-transparent border-accent text-accent;
+  }
+
+  .category-regulatory-policy {
+    @apply bg-transparent border-accent text-accent;
+  }
+
   .arrow-link {
     @apply text-xs font-semibold uppercase tracking-wider text-muted-foreground 
            hover:text-accent transition-colors duration-200 inline-flex items-center gap-1;
