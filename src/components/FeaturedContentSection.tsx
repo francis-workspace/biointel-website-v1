@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { featuredArticle, getScopedArticles, recentArticles, type Article, type PillarCategory } from '@/data/articles';
+import type { Article, PillarCategory } from '@/data/articles';
+import { useFeaturedArticle, useRecentArticles } from '@/data/articlesApi';
 
 type FeaturedContentSectionProps = {
   category?: PillarCategory;
@@ -13,21 +14,14 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
   const fallbackImageUrl =
     'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb';
 
-  const scopedArticles = useMemo(() => {
-    return getScopedArticles(category);
-  }, [category]);
-
-  const scopedFeaturedArticle = useMemo(() => {
-    if (!category) return featuredArticle;
-    return scopedArticles[0] ?? featuredArticle;
-  }, [category, scopedArticles]);
+  const { data: featuredArticle } = useFeaturedArticle(category);
+  const { data: recentArticles } = useRecentArticles(category);
 
   const scopedRecentArticles = useMemo(() => {
-    if (!category) return recentArticles;
-    return scopedArticles
-      .filter((a) => a.title !== scopedFeaturedArticle.title)
-      .map((a) => ({ ...a, popularity: a.popularity ?? 0 }));
-  }, [category, scopedArticles, scopedFeaturedArticle.title]);
+    const all = (recentArticles ?? []).map((a) => ({ ...a, popularity: a.popularity ?? 0 }));
+    if (!featuredArticle) return all;
+    return all.filter((a) => a.title !== featuredArticle.title);
+  }, [featuredArticle, recentArticles]);
 
   const filteredRecentArticles = useMemo(() => {
     if (filter === 'popular') {
@@ -83,38 +77,40 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             <div className="lg:col-span-4">
               <img
-                src={scopedFeaturedArticle.imageUrl ?? fallbackImageUrl}
-                alt={scopedFeaturedArticle.title}
+                src={featuredArticle?.imageUrl ?? fallbackImageUrl}
+                alt={featuredArticle?.title ?? 'Featured article'}
                 className="aspect-video w-full border border-border object-cover"
                 loading="lazy"
               />
             </div>
             
             <div className="lg:col-span-8">
-              <span className={`category-tag ${scopedFeaturedArticle.categoryClass} mb-4 inline-block`}>
-                {scopedFeaturedArticle.category}
+              <span className={`category-tag ${featuredArticle?.categoryClass ?? ''} mb-4 inline-block`}>
+                {featuredArticle?.category}
               </span>
               
               <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4 hover:text-accent transition-colors">
-                <Link to={scopedFeaturedArticle.link}>{scopedFeaturedArticle.title}</Link>
+                {featuredArticle ? <Link to={featuredArticle.link}>{featuredArticle.title}</Link> : null}
               </h3>
               
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                {scopedFeaturedArticle.excerpt}
+                {featuredArticle?.excerpt}
               </p>
               
               <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                <span>{scopedFeaturedArticle.author}</span>
+                <span>{featuredArticle?.author}</span>
                 <span>•</span>
-                <span>{scopedFeaturedArticle.date}</span>
+                <span>{featuredArticle?.date}</span>
                 <span>•</span>
-                <span>{scopedFeaturedArticle.readTime}</span>
+                <span>{featuredArticle?.readTime}</span>
               </div>
               
-              <Link to={scopedFeaturedArticle.link} className="arrow-link">
-                READ MORE
-                <ArrowRight className="w-3 h-3" />
-              </Link>
+              {featuredArticle ? (
+                <Link to={featuredArticle.link} className="arrow-link">
+                  READ MORE
+                  <ArrowRight className="w-3 h-3" />
+                </Link>
+              ) : null}
             </div>
           </div>
         </article>

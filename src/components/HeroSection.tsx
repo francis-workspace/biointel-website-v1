@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { featuredArticle, recentArticles, type PillarCategory } from '@/data/articles';
+import type { PillarCategory } from '@/data/articles';
+import { useFeaturedArticle, useRecentArticles } from '@/data/articlesApi';
 import authorAvatar from '@/images/luffy.webp';
 
 type HeroSectionProps = {
@@ -11,13 +12,11 @@ const HeroSection = ({ category }: HeroSectionProps) => {
   const fallbackImageUrl =
     'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb';
 
-  const scopedLatestItems = category
-    ? recentArticles.filter((a) => a.category === category).slice(0, 3)
-    : recentArticles.slice(0, 3);
+  const { data: recent } = useRecentArticles(category);
+  const { data: featured } = useFeaturedArticle(category);
 
-  const scopedFeaturedItem = category
-    ? (recentArticles.find((a) => a.category === category) ?? featuredArticle)
-    : featuredArticle;
+  const scopedLatestItems = (recent ?? []).slice(0, 3);
+  const scopedFeaturedItem = featured;
 
   return (
     <section id="hero" className="py-10 lg:py-14 bg-background">
@@ -65,13 +64,15 @@ const HeroSection = ({ category }: HeroSectionProps) => {
             style={{ animationDelay: '0.1s' }}
           >
             <Link
-              to={scopedFeaturedItem.link}
-              className="group relative block overflow-hidden rounded-2xl border border-border bg-foreground"
+              to={scopedFeaturedItem?.link ?? '#'}
+              className={`group relative block overflow-hidden rounded-2xl border border-border bg-foreground ${
+                scopedFeaturedItem ? '' : 'pointer-events-none opacity-70'
+              }`}
             >
-              {scopedFeaturedItem.hasImage !== false && (
+              {scopedFeaturedItem?.hasImage !== false && (
                 <img
-                  src={scopedFeaturedItem.imageUrl ?? fallbackImageUrl}
-                  alt={scopedFeaturedItem.title}
+                  src={scopedFeaturedItem?.imageUrl ?? fallbackImageUrl}
+                  alt={scopedFeaturedItem?.title ?? 'Featured article'}
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -83,10 +84,10 @@ const HeroSection = ({ category }: HeroSectionProps) => {
                   Featured
                 </div>
                 <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold text-background leading-tight">
-                  {scopedFeaturedItem.title}
+                  {scopedFeaturedItem?.title}
                 </h2>
                 <p className="mt-4 text-sm sm:text-base text-background/80 max-w-2xl">
-                  {scopedFeaturedItem.excerpt}
+                  {scopedFeaturedItem?.excerpt}
                 </p>
                 <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">
                   <div className="flex items-center gap-2 text-xs text-background/70">
@@ -96,9 +97,9 @@ const HeroSection = ({ category }: HeroSectionProps) => {
                       className="w-7 h-7 rounded-full border border-background/20 object-cover"
                       loading="lazy"
                     />
-                    <span className="font-medium text-background/85">{scopedFeaturedItem.author}</span>
+                    <span className="font-medium text-background/85">{scopedFeaturedItem?.author}</span>
                     <span aria-hidden="true">•</span>
-                    <span>{scopedFeaturedItem.date}</span>
+                    <span>{scopedFeaturedItem?.date}</span>
                   </div>
 
                   <span className="inline-flex items-center gap-2 text-sm font-semibold text-background/90 group-hover:text-background transition-colors">

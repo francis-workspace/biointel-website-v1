@@ -3,17 +3,18 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import SubscribeModal from "./components/SubscribeModal";
 import { SubscribeModalProvider } from "./components/SubscribeModalProvider";
 import { useSubscribeModal } from "./components/useSubscribeModal";
 import ScrollToHero from "./components/ScrollToHero";
-import Index from "./pages/Index";
-import CategoryPage from "./pages/CategoryPage";
-import About from "./pages/About";
-import Privacy from "./pages/Privacy";
-import Article from "./pages/Article";
-import NotFound from "./pages/NotFound";
+
+const Index = lazy(() => import("./pages/Index"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage"));
+const About = lazy(() => import("./pages/About"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Article = lazy(() => import("./pages/Article"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -72,74 +73,76 @@ const App = () => (
         <BeehiivPreload />
         <BrowserRouter>
           <ScrollToHero />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route
-              path="/ai-drug-discovery"
-              element={
-                <CategoryPage
-                  title="AI in Drug Discovery"
-                  description="Machine learning, predictive models, and computational biology—how AI is changing discovery workflows and probability of success."
-                  category="AI in Drug Discovery"
-                />
-              }
-            />
-            <Route
-              path="/biopharma-industry"
-              element={
-                <CategoryPage
-                  title="Biopharmaceutical Industry"
-                  description="Drug development, clinical trials, and industry dynamics—what changes timelines, risk, and competitive positioning."
-                  category="Biopharmaceutical Industry"
-                />
-              }
-            />
-            <Route
-              path="/biotech-innovation"
-              element={
-                <CategoryPage
-                  title="Biotech Innovation"
-                  description="Gene therapy, CRISPR, synthetic biology, and emerging platforms—what’s real, what’s hype, and what translates."
-                  category="Biotech Innovation"
-                />
-              }
-            />
-            <Route
-              path="/healthcare-investment"
-              element={
-                <CategoryPage
-                  title="Healthcare Investment"
-                  description="Funding rounds, M&A, IPOs, and market analysis—where capital is flowing and why the tape moves."
-                  category="Healthcare Investment"
-                />
-              }
-            />
-            <Route
-              path="/medical-technology"
-              element={
-                <CategoryPage
-                  title="Medical Technology"
-                  description="Digital health, diagnostics, and medical devices—signals that matter for adoption, reimbursement, and outcomes."
-                  category="Medical Technology"
-                />
-              }
-            />
-            <Route
-              path="/regulatory-policy"
-              element={
-                <CategoryPage
-                  title="Regulatory & Policy"
-                  description="FDA actions, approvals, policy shifts, and compliance—how rules change timelines and probability."
-                  category="Regulatory & Policy"
-                />
-              }
-            />
-            <Route path="/about" element={<About />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/article/:slug" element={<Article />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route
+                path="/ai-drug-discovery"
+                element={
+                  <CategoryPage
+                    title="AI in Drug Discovery"
+                    description="Machine learning, predictive models, and computational biology—how AI is changing discovery workflows and probability of success."
+                    category="AI in Drug Discovery"
+                  />
+                }
+              />
+              <Route
+                path="/biopharma-industry"
+                element={
+                  <CategoryPage
+                    title="Biopharmaceutical Industry"
+                    description="Drug development, clinical trials, and industry dynamics—what changes timelines, risk, and competitive positioning."
+                    category="Biopharmaceutical Industry"
+                  />
+                }
+              />
+              <Route
+                path="/biotech-innovation"
+                element={
+                  <CategoryPage
+                    title="Biotech Innovation"
+                    description="Gene therapy, CRISPR, synthetic biology, and emerging platforms—what’s real, what’s hype, and what translates."
+                    category="Biotech Innovation"
+                  />
+                }
+              />
+              <Route
+                path="/healthcare-investment"
+                element={
+                  <CategoryPage
+                    title="Healthcare Investment"
+                    description="Funding rounds, M&A, IPOs, and market analysis—where capital is flowing and why the tape moves."
+                    category="Healthcare Investment"
+                  />
+                }
+              />
+              <Route
+                path="/medical-technology"
+                element={
+                  <CategoryPage
+                    title="Medical Technology"
+                    description="Digital health, diagnostics, and medical devices—signals that matter for adoption, reimbursement, and outcomes."
+                    category="Medical Technology"
+                  />
+                }
+              />
+              <Route
+                path="/regulatory-policy"
+                element={
+                  <CategoryPage
+                    title="Regulatory & Policy"
+                    description="FDA actions, approvals, policy shifts, and compliance—how rules change timelines and probability."
+                    category="Regulatory & Policy"
+                  />
+                }
+              />
+              <Route path="/about" element={<About />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/article/:slug" element={<Article />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
           <SubscribeModalHost />
         </BrowserRouter>
       </SubscribeModalProvider>

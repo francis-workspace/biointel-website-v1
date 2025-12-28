@@ -26,7 +26,6 @@ const ZapierWebhook = ({ className }: ZapierWebhookProps) => {
     }
 
     setIsLoading(true);
-    console.log("Triggering Zapier webhook:", webhookUrl);
 
     try {
       await fetch(webhookUrl, {
@@ -48,7 +47,6 @@ const ZapierWebhook = ({ className }: ZapierWebhookProps) => {
           "The request was sent to Zapier. Check your Zap's history to confirm it was triggered.",
       });
     } catch (error) {
-      console.error("Error triggering webhook:", error);
       toast({
         title: "Error",
         description:

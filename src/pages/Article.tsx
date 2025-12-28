@@ -1,12 +1,12 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useParams } from 'react-router-dom';
-import { getArticleBySlug } from '@/data/articles';
+import { useArticleBySlug } from '@/data/articlesApi';
 import authorAvatar from '@/images/luffy.webp';
 
 const Article = () => {
   const { slug } = useParams();
-  const article = slug ? getArticleBySlug(slug) : undefined;
+  const { data: article } = useArticleBySlug(slug);
   const fallbackImageUrl =
     'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb';
 
