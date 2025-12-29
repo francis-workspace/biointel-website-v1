@@ -11,8 +11,7 @@ type FeaturedContentSectionProps = {
 const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
   const [filter, setFilter] = useState<'latest' | 'popular'>('latest');
   const [showAll, setShowAll] = useState(false);
-  const fallbackImageUrl =
-    'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb';
+  const fallbackImageUrl = '/placeholder.svg';
 
   const { data: featuredArticle } = useFeaturedArticle(category);
   const { data: recentArticles } = useRecentArticles(category);
@@ -81,6 +80,7 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
                 alt={featuredArticle?.title ?? 'Featured article'}
                 className="aspect-video w-full border border-border object-cover"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             
@@ -119,7 +119,7 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
         <div className="space-y-0">
           {visibleRecentArticles.map((article, index) => (
             <article 
-              key={article.title} 
+              key={article.slug} 
               className={`py-6 ${index !== visibleRecentArticles.length - 1 ? 'border-b border-border' : ''}`}
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
@@ -130,6 +130,7 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
                       alt={article.title}
                       className="aspect-video w-full border border-border object-cover"
                       loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 )}

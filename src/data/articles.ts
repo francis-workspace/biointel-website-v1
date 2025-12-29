@@ -1,3 +1,14 @@
+import aiDrug1 from '@/images/blogs/ai&drug1.jpg';
+import aiDrug2 from '@/images/blogs/ai&drug2.jpg';
+import biopharma1 from '@/images/blogs/biopharma1.jpg';
+import biopharma2 from '@/images/blogs/biopharma2.jpg';
+import biotech2 from '@/images/blogs/biotech2.jpg';
+import healthcareInvest1 from '@/images/blogs/healthcareinvest1.jpg';
+import healthcareInvest2 from '@/images/blogs/healthcareinvest2jpg.jpg';
+import medtech2 from '@/images/blogs/medtech2.jpg';
+import policy1 from '@/images/blogs/policy.jpg';
+import policy2 from '@/images/blogs/policy2.jpg';
+
 export type PillarCategory =
   | 'AI in Drug Discovery'
   | 'Biopharmaceutical Industry'
@@ -57,8 +68,7 @@ export const featuredArticle: Article = {
   author: 'BioIntel Research',
   date: 'Dec 15, 2025',
   readTime: '8 min read',
-  imageUrl:
-    'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb',
+  imageUrl: biopharma1,
   deck:
     'A signal-first checklist for sizing asymmetric biotech setups—what to measure, what to ignore, and how to avoid getting trapped by narrative.',
   content: [
@@ -132,8 +142,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 20, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: aiDrug1,
     deck:
       'If a model can’t survive dataset shift and wet-lab constraints, it’s not a platform. Here is how to pressure-test claims before you build a roadmap around them.',
     hasImage: true,
@@ -172,8 +181,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 18, 2025',
     readTime: '6 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: aiDrug2,
     deck:
       'Closed-loop biology works when measurement, controls, and objectives are aligned. Most teams fail by optimizing proxies that do not translate into better molecules.',
     hasImage: true,
@@ -212,11 +220,10 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 16, 2025',
     readTime: '8 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1581092919535-7146f6c9f1b9?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: undefined,
     deck:
       'Defensibility comes from feedback loops, not static corpora. If you can’t refresh labels faster than the world changes, your moat decays.',
-    hasImage: true,
+    hasImage: false,
     content: [
       { type: 'h2', key: 'h2-1', text: 'Summary' },
       {
@@ -253,8 +260,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 19, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: biopharma2,
     deck:
       'Before you react to a press release, write down what had to be true for the program to work—and what the topline actually proves.',
     hasImage: true,
@@ -293,11 +299,10 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 17, 2025',
     readTime: '8 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: undefined,
     deck:
       'The market tends to price biology first, but the FDA and the factory price CMC. Learn to spot the “unforced errors” before they become a hold.',
-    hasImage: true,
+    hasImage: false,
     content: [
       { type: 'h2', key: 'h2-1', text: 'Summary' },
       {
@@ -333,11 +338,10 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 13, 2025',
     readTime: '6 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: undefined,
     deck:
       'Clinical success is necessary, not sufficient. The market is shaped by reimbursement rules, prescribing behavior, and the “last mile” of operations.',
-    hasImage: true,
+    hasImage: false,
     content: [
       { type: 'h2', key: 'h2-1', text: 'Summary' },
       {
@@ -374,8 +378,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 21, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: biotech2,
     deck:
       'In gene editing, the best editor is irrelevant if it can’t get to the right tissue safely. Here’s how teams are trying to break that constraint.',
     hasImage: true,
@@ -414,11 +417,10 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 15, 2025',
     readTime: '6 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1559757175-5700dde67548?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: undefined,
     deck:
       'If you can’t ship consistent product at consistent cost, you don’t have a platform—you have a lab. This checklist keeps the evaluation grounded.',
-    hasImage: true,
+    hasImage: false,
     content: [
       { type: 'h2', key: 'h2-1', text: 'Summary' },
       {
@@ -454,8 +456,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 11, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: biotech2,
     deck:
       'The best teams pair modeling with disciplined screening design. If you can’t measure reliably, you can’t optimize reliably.',
     hasImage: true,
@@ -495,8 +496,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 22, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: healthcareInvest1,
     deck:
       'Not all capital is equal. Terms can tell you whether a company is buying time efficiently—or mortgaging its future.',
     hasImage: true,
@@ -535,8 +535,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 12, 2025',
     readTime: '6 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: healthcareInvest2,
     deck:
       'Microcap biotech is often a market-structure game. If you ignore liquidity, you misprice timelines and the cost of capital.',
     hasImage: true,
@@ -575,11 +574,10 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 08, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: undefined,
     deck:
       'Partnership terms are signals. Learn to read whether the counterparty is buying the upside—or buying an option to wait.',
-    hasImage: true,
+    hasImage: false,
     content: [
       { type: 'h2', key: 'h2-1', text: 'Summary' },
       {
@@ -616,11 +614,10 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 23, 2025',
     readTime: '6 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1576671081837-49000212a370?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: undefined,
     deck:
       'Digital health succeeds when it reduces friction in clinical workflows and maps cleanly to reimbursement. Everything else is ornament.',
-    hasImage: true,
+    hasImage: false,
     content: [
       { type: 'h2', key: 'h2-1', text: 'Summary' },
       {
@@ -656,8 +653,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 10, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1580281658628-47a1e45f5b6d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: medtech2,
     deck:
       'A diagnostic is valuable only if it changes decisions and outcomes. This framework helps you evaluate claims in the way payers and guidelines do.',
     hasImage: true,
@@ -696,8 +692,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 06, 2025',
     readTime: '6 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1587370560942-ad2a04eabb6d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: medtech2,
     deck:
       'Device stories are won and lost after launch. Post-market reality—training, complaints, and failure rates—can reprice the thesis faster than trials.',
     hasImage: true,
@@ -737,8 +732,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 24, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: policy1,
     deck:
       'Regulatory events are probabilistic updates. Translate each one into “what changed in timelines, evidence requirements, and failure modes.”',
     hasImage: true,
@@ -777,11 +771,10 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 09, 2025',
     readTime: '6 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: undefined,
     deck:
       'Treat designations as process signals. The investable question is whether evidence quality improved—not whether the label sounds impressive.',
-    hasImage: true,
+    hasImage: false,
     content: [
       { type: 'h2', key: 'h2-1', text: 'Summary' },
       {
@@ -817,8 +810,7 @@ export const recentArticles: Article[] = [
     author: 'BioIntel Research',
     date: 'Dec 05, 2025',
     readTime: '7 min read',
-    imageUrl:
-      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb',
+    imageUrl: policy2,
     deck:
       'Compliance does not require bureaucracy—it requires traceability. This guide covers the minimum practices that survive audits and scale safely.',
     hasImage: true,

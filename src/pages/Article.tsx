@@ -6,11 +6,29 @@ import authorAvatar from '@/images/luffy.webp';
 
 const Article = () => {
   const { slug } = useParams();
-  const { data: article } = useArticleBySlug(slug);
-  const fallbackImageUrl =
-    'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb';
+  const { data: article, isLoading } = useArticleBySlug(slug);
+  const fallbackImageUrl = '/placeholder.svg';
 
-  if (!article) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1">
+          <section id="hero" className="py-12 lg:py-16 bg-background">
+            <div className="container-main">
+              <div className="max-w-3xl mx-auto">
+                <div className="h-8 w-3/4 bg-secondary/40" />
+                <div className="mt-4 h-4 w-1/2 bg-secondary/30" />
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (article === null) {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
@@ -47,6 +65,7 @@ const Article = () => {
                     alt={article.title}
                     className="aspect-[16/9] w-full border border-border object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
               )}
@@ -66,6 +85,7 @@ const Article = () => {
                     alt="Author profile"
                     className="w-8 h-8 rounded-full border border-border object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                   <span className="font-medium text-foreground/80">{article.author}</span>
                 </span>
