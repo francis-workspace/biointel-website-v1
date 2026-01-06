@@ -1,13 +1,13 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useArticleBySlug } from '@/data/articlesApi';
-import authorAvatar from '@/images/luffy.webp';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const Article = () => {
   const { slug } = useParams();
   const { data: article, isLoading } = useArticleBySlug(slug);
-  const fallbackImageUrl = '/placeholder.svg';
 
   if (isLoading) {
     return (
@@ -58,10 +58,10 @@ const Article = () => {
         <section id="hero" className="py-12 lg:py-16 bg-background">
           <div className="container-main">
             <div className="max-w-3xl mx-auto">
-              {article.hasImage !== false && (
+              {article.hasImage !== false && !!article.imageUrl && (
                 <div className="mb-8">
                   <img
-                    src={article.imageUrl ?? fallbackImageUrl}
+                    src={article.imageUrl}
                     alt={article.title}
                     className="aspect-[16/9] w-full border border-border object-cover"
                     loading="lazy"
@@ -80,14 +80,23 @@ const Article = () => {
 
               <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                 <span className="inline-flex items-center gap-2">
-                  <img
-                    src={authorAvatar}
-                    alt="Author profile"
-                    className="w-8 h-8 rounded-full border border-border object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span className="font-medium text-foreground/80">{article.author}</span>
+                  {article.authorAvatarUrl ? (
+                    <img
+                      src={article.authorAvatarUrl}
+                      alt={article.author}
+                      className="w-8 h-8 rounded-full border border-border object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : null}
+
+                  {article.authorSlug ? (
+                    <Link to={`/author/${article.authorSlug}`} className="font-medium text-foreground/80 hover:text-accent">
+                      {article.author}
+                    </Link>
+                  ) : (
+                    <span className="font-medium text-foreground/80">{article.author}</span>
+                  )}
                 </span>
                 <span aria-hidden="true">•</span>
                 <span>{article.date}</span>
@@ -115,35 +124,20 @@ const Article = () => {
                   </p>
                 </div>
               ) : (
-                article.content.map((block) => {
-                  if (block.type === 'h2') {
-                    return (
-                      <h2 key={block.key} className="text-xl lg:text-2xl font-bold text-foreground">
-                        {block.text}
-                      </h2>
-                    );
-                  }
-
-                  if (block.type === 'link') {
-                    return (
-                      <a
-                        key={block.key}
-                        href={block.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-semibold text-accent hover:underline"
-                      >
-                        {block.text}
-                      </a>
-                    );
-                  }
-
-                  return (
-                    <p key={block.key} className="text-base text-muted-foreground leading-relaxed">
-                      {block.text}
-                    </p>
-                  );
-                })
+                <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-pre:bg-secondary/30 prose-pre:border prose-pre:border-border prose-code:text-foreground">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      a: ({ children, href }) => (
+                        <a href={href} target="_blank" rel="noopener noreferrer">
+                          {children}
+                        </a>
+                      ),
+                    }}
+                  >
+                    {article.content}
+                  </ReactMarkdown>
+                </div>
               )}
             </div>
           </div>

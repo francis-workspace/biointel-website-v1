@@ -11,7 +11,6 @@ type FeaturedContentSectionProps = {
 const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
   const [filter, setFilter] = useState<'latest' | 'popular'>('latest');
   const [showAll, setShowAll] = useState(false);
-  const fallbackImageUrl = '/placeholder.svg';
 
   const { data: featuredArticle } = useFeaturedArticle(category);
   const { data: recentArticles } = useRecentArticles(category);
@@ -38,6 +37,23 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
     if (showAll) return filteredRecentArticles;
     return filteredRecentArticles.slice(0, 10);
   }, [filteredRecentArticles, showAll]);
+
+  const hasAnyArticles = !!featuredArticle || filteredRecentArticles.length > 0;
+
+  if (!hasAnyArticles) {
+    return (
+      <section className="py-16 lg:py-24 bg-secondary/30">
+        <div className="container-main">
+          <h2 className="section-title mb-0">ALL INTELLIGENCE</h2>
+          <div className="section-divider" />
+          <div className="rounded-2xl border border-border bg-background p-8 lg:p-10 text-center">
+            <h3 className="text-base font-bold text-foreground">No articles posted yet</h3>
+            <p className="mt-2 text-sm text-muted-foreground">When new posts are available, they’ll appear here.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 lg:py-24 bg-secondary/30">
@@ -70,50 +86,64 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
           </div>
         </div>
         <div className="section-divider" />
-        
-        {/* Featured Article */}
-        <article className="mb-8 pb-8 border-b border-border">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-            <div className="lg:col-span-4">
-              <img
-                src={featuredArticle?.imageUrl ?? fallbackImageUrl}
-                alt={featuredArticle?.title ?? 'Featured article'}
-                className="aspect-video w-full border border-border object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            
-            <div className="lg:col-span-8">
-              <span className={`category-tag ${featuredArticle?.categoryClass ?? ''} mb-4 inline-block`}>
-                {featuredArticle?.category}
-              </span>
-              
-              <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4 hover:text-accent transition-colors">
-                {featuredArticle ? <Link to={featuredArticle.link}>{featuredArticle.title}</Link> : null}
-              </h3>
-              
-              <p className="text-muted-foreground mb-4 leading-relaxed">
-                {featuredArticle?.excerpt}
-              </p>
-              
-              <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                <span>{featuredArticle?.author}</span>
-                <span>•</span>
-                <span>{featuredArticle?.date}</span>
-                <span>•</span>
-                <span>{featuredArticle?.readTime}</span>
-              </div>
-              
-              {featuredArticle ? (
+
+        {featuredArticle ? (
+          <article className="mb-8 pb-8 border-b border-border">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+              {featuredArticle.hasImage !== false && !!featuredArticle.imageUrl ? (
+                <div className="lg:col-span-4">
+                  <img
+                    src={featuredArticle.imageUrl}
+                    alt={featuredArticle.title}
+                    className="aspect-video w-full border border-border object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ) : null}
+
+              <div className="lg:col-span-8">
+                <span className={`category-tag ${featuredArticle.categoryClass} mb-4 inline-block`}>
+                  {featuredArticle.category}
+                </span>
+
+                <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4 hover:text-accent transition-colors">
+                  <Link to={featuredArticle.link}>{featuredArticle.title}</Link>
+                </h3>
+
+                <p className="text-muted-foreground mb-4 leading-relaxed">{featuredArticle.excerpt}</p>
+
+                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+                  {featuredArticle.authorAvatarUrl ? (
+                    <img
+                      src={featuredArticle.authorAvatarUrl}
+                      alt={featuredArticle.author}
+                      className="w-7 h-7 rounded-full border border-border object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : null}
+                  {featuredArticle.authorSlug ? (
+                    <Link to={`/author/${featuredArticle.authorSlug}`} className="hover:text-accent">
+                      {featuredArticle.author}
+                    </Link>
+                  ) : (
+                    <span>{featuredArticle.author}</span>
+                  )}
+                  <span>•</span>
+                  <span>{featuredArticle.date}</span>
+                  <span>•</span>
+                  <span>{featuredArticle.readTime}</span>
+                </div>
+
                 <Link to={featuredArticle.link} className="arrow-link">
                   READ MORE
                   <ArrowRight className="w-3 h-3" />
                 </Link>
-              ) : null}
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        ) : null}
         
         {/* Recent Articles List */}
         <div className="space-y-0">
@@ -123,10 +153,10 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
               className={`py-6 ${index !== visibleRecentArticles.length - 1 ? 'border-b border-border' : ''}`}
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-                {article.hasImage !== false && (
+                {article.hasImage !== false && !!article.imageUrl && (
                   <div className="lg:col-span-4">
                     <img
-                      src={article.imageUrl ?? fallbackImageUrl}
+                      src={article.imageUrl}
                       alt={article.title}
                       className="aspect-video w-full border border-border object-cover"
                       loading="lazy"
@@ -149,7 +179,22 @@ const FeaturedContentSection = ({ category }: FeaturedContentSectionProps) => {
                   </p>
 
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <span>{article.author}</span>
+                    {article.authorAvatarUrl ? (
+                      <img
+                        src={article.authorAvatarUrl}
+                        alt={article.author}
+                        className="w-7 h-7 rounded-full border border-border object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : null}
+                    {article.authorSlug ? (
+                      <Link to={`/author/${article.authorSlug}`} className="hover:text-accent">
+                        {article.author}
+                      </Link>
+                    ) : (
+                      <span>{article.author}</span>
+                    )}
                     <span>•</span>
                     <span>{article.date}</span>
                     <span>•</span>

@@ -11,24 +11,6 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        <section className="bg-background min-h-[60vh] lg:min-h-[70vh] flex items-center py-12 lg:py-16">
-          <div className="container-main">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Intelligence for the Future of Medicine
-              </h1>
-              <p className="mt-4 text-base lg:text-lg text-muted-foreground">
-                BioIntel covers the signals that shape biotech—AI in drug discovery, biopharma industry dynamics, biotech innovation, healthcare investment, medical technology, and regulatory &amp; policy.
-              </p>
-              <div className="mt-8 flex justify-center">
-                <button type="button" className="btn-primary" onClick={openSubscribe}>
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <HeroSection />
 
         <section className="border-b border-border py-12 lg:py-16">
