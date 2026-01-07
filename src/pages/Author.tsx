@@ -21,6 +21,7 @@ type ArticleRow = {
   excerpt: string;
   date_display: string | null;
   published_date: string | null;
+  created_at?: string | null;
   read_time: string;
   category: string;
   category_class: string;
@@ -59,11 +60,12 @@ const Author = () => {
       const { data, error } = await supabase
         .from('articles')
         .select(
-          'slug,title,excerpt,date_display,published_date,read_time,category,category_class,image_url,has_image'
+          'slug,title,excerpt,date_display,published_date,created_at,read_time,category,category_class,image_url,has_image'
         )
         .eq('is_published', true)
         .eq('author_id', author.id)
-        .order('published_date', { ascending: false })
+        .order('published_date', { ascending: false, nullsFirst: false })
+        .order('created_at', { ascending: false })
         .limit(5);
 
       if (error) throw error;

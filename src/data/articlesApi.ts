@@ -21,6 +21,7 @@ type DbArticleRow = {
   author_id: string | null;
   published_date: string | null;
   date_display: string | null;
+  created_at?: string | null;
   read_time: string;
   deck: string | null;
   image_url: string | null;
@@ -133,6 +134,9 @@ export const useFeaturedArticle = (category?: PillarCategory) => {
 
   return useQuery({
     queryKey: ['articles', 'featured', category ?? 'all'],
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: true,
+    staleTime: 0,
     queryFn: async (): Promise<Article | null> => {
       if (!supabaseEnabled) return null;
 
@@ -141,13 +145,18 @@ export const useFeaturedArticle = (category?: PillarCategory) => {
       const base = supabase!
         .from('articles')
         .select(
-          'slug,category,category_class,title,excerpt,author,author_id,published_date,date_display,read_time,deck,image_url,has_image,content,popularity,is_featured,authors:author_id(slug,name,avatar_url)'
+          'slug,category,category_class,title,excerpt,author,author_id,published_date,date_display,created_at,read_time,deck,image_url,has_image,content,popularity,is_featured,authors:author_id(slug,name,avatar_url)'
         )
         .eq('is_published', true);
 
       const { data, error } = category
-        ? await base.eq('category', category).order('is_featured', { ascending: false }).order('published_date', { ascending: false }).limit(1)
-        : await base.order('published_date', { ascending: false }).limit(1);
+        ? await base
+            .eq('category', category)
+            .order('is_featured', { ascending: false })
+            .order('published_date', { ascending: false, nullsFirst: false })
+            .order('created_at', { ascending: false })
+            .limit(1)
+        : await base.order('published_date', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false }).limit(1);
 
       if (error) throw error;
       const first = (data?.[0] as DbArticleRow | undefined) ?? undefined;
@@ -162,6 +171,9 @@ export const useRecentArticles = (category?: PillarCategory) => {
 
   return useQuery({
     queryKey: ['articles', 'recent', category ?? 'all'],
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: true,
+    staleTime: 0,
     queryFn: async (): Promise<Article[]> => {
       if (!supabaseEnabled) return [];
 
@@ -170,10 +182,11 @@ export const useRecentArticles = (category?: PillarCategory) => {
       let q = supabase!
         .from('articles')
         .select(
-          'slug,category,category_class,title,excerpt,author,author_id,published_date,date_display,read_time,deck,image_url,has_image,content,popularity,is_featured,authors:author_id(slug,name,avatar_url)'
+          'slug,category,category_class,title,excerpt,author,author_id,published_date,date_display,created_at,read_time,deck,image_url,has_image,content,popularity,is_featured,authors:author_id(slug,name,avatar_url)'
         )
         .eq('is_published', true)
-        .order('published_date', { ascending: false });
+        .order('published_date', { ascending: false, nullsFirst: false })
+        .order('created_at', { ascending: false });
 
       if (category) q = q.eq('category', category);
 
